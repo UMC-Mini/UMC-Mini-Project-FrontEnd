@@ -9,6 +9,7 @@ import Chatting from "./pages/Chatting/Chatting.jsx";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 
 //라우팅 정리
+//도메인 별 작업
 const Layout = () => {
   return (
     <>
