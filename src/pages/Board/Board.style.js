@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 const BoardBox = styled.div`
   width: 80%;
-  height: 80%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,8 +53,8 @@ const SearchBoxButton = styled.button`
 const SearchBoxWritingButton = styled.button`
   width: 10%;
   height: 30%;
-  /* color: skyblue; */
-  background-color: aliceblue;
+  color: white;
+  background-color: #186dec;
   border: 1px solid skyblue;
   border-radius: 10px;
 

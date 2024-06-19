@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./Board.style";
 import BoardPost from "./components/BoardPost";
 import { PostItem } from "./components/mock_data";
+import Navbar from "./components/Navbar/Navbar";
 
 export default function Board() {
   const HeaderUser = {
@@ -9,6 +10,7 @@ export default function Board() {
   };
   return (
     <S.Container>
+      <Navbar></Navbar>
       <S.BoardBox>
         <S.BoardBoxHeader>문의 게시판</S.BoardBoxHeader>
         <S.BoardBoxPostContainer>

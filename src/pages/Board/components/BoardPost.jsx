@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import * as S from "./BoardPost.style";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TiPin } from "react-icons/ti";
 
 function BoardPost(props) {
   // const { id, title, writer, writeTime, views, isHeader, isHighlight } = props;
@@ -16,6 +18,8 @@ function BoardPost(props) {
     replies, // 안 씀
     isHeader,
   } = props;
+
+  const navigate = useNavigate();
 
   const [width, setWidth] = useState(["10%", "10%", "10%", "15%", "10%"]);
   const [marginRight, setMarginRight] = useState([
@@ -44,10 +48,13 @@ function BoardPost(props) {
   }, [isHeader]);
 
   return (
-    <S.BoardBoxPost key={id} borderPx={borderPx}>
-      {console.log(width, marginRight)}
+    <S.BoardBoxPost
+      key={id}
+      borderPx={borderPx}
+      onClick={() => navigate(`/board/post/` + id)}
+    >
       <S.BoardBoxPostItem width={width[0]} marginRight={marginRight[0]}>
-        {id}
+        {isNotification ? <TiPin></TiPin> : id}
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[1]} marginRight={marginRight[1]}>
         {title}
