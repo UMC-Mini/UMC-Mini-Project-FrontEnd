@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { CiSearch } from "react-icons/ci";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Container = styled.div`
   width: 100%;
@@ -7,19 +10,21 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   overflow: hidden;
 `;
 const BoardBox = styled.div`
   width: 80%;
-  height: 70%;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 `;
 const SearchBox = styled.div`
   width: 80%;
-  height: 20%;
+  height: 80px;
   display: flex;
   flex-direction: row;
   /* justify-content: ; */
@@ -31,10 +36,20 @@ const BoardBoxPostContainer = styled.ul`
   width: 100%;
   height: 80%;
   list-style: none;
-  border-top: 3px solid black;
-  border-bottom: 1.5px solid black;
+  /* border-top: 3px solid black; */
+  /* border-bottom: 1.5px solid black; */
 `;
-const BoardBoxPageButton = styled.button`
+
+const BoardBoxPageButtonContainer = styled.div`
+  display: flex;
+`;
+const BoardBoxPageForwardButton = styled(IoIosArrowForward)`
+  width: 30px;
+  height: 30px;
+  border: none;
+`;
+
+const BoardBoxPageBackButton = styled(IoIosArrowBack)`
   width: 30px;
   height: 30px;
   border: none;
@@ -45,22 +60,26 @@ const SearchBoxInput = styled.input`
   height: 30%;
   border-radius: 10px;
 `;
-const SearchBoxButton = styled.button`
+const SearchBoxButton = styled(CiSearch)`
   margin-right: 60%;
-  left: -100px;
+  position: relative;
+  left: -20px;
   /* margin-left: 70%; */
+  &:hover {
+    cursor: pointer;
+  }
 `;
 const SearchBoxWritingButton = styled.button`
   width: 10%;
-  height: 30%;
+  height: 50%;
   color: white;
   background-color: #186dec;
   border: 1px solid skyblue;
   border-radius: 10px;
 
   &:hover {
-    scale: 1.15;
-    /* pointer-events: "click"; */
+    scale: 1.05;
+    cursor: pointer;
   }
 `;
 
@@ -70,7 +89,9 @@ export {
   SearchBox,
   BoardBoxHeader,
   BoardBoxPostContainer,
-  BoardBoxPageButton,
+  BoardBoxPageButtonContainer,
+  BoardBoxPageForwardButton,
+  BoardBoxPageBackButton,
   SearchBoxInput,
   SearchBoxButton,
   SearchBoxWritingButton,

@@ -27,6 +27,10 @@ const leftBoxLogo = styled.img`
 const leftBoxText = styled.div`
   width: 45%;
   height: 22px;
+  &:hover {
+    scale: 1.05;
+    cursor: pointer;
+  }
 `;
 
 const rightBox = styled.div`
@@ -40,6 +44,10 @@ const rightBoxText = styled.p`
   font-size: 18px;
   font-weight: 550;
   margin-right: 10px;
+  &:hover {
+    scale: 1.05;
+    cursor: pointer;
+  }
 `;
 
 const rightBoxPerson = styled(IoPersonCircleSharp)`

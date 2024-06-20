@@ -1,15 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const BoardBoxPost = styled.li`
   width: 100%;
   height: 9.8%;
   display: flex;
   align-items: center;
+  border-top: ${(props) => (props.isTop ? "3px solid black" : 0)};
   border-bottom: ${(props) => props.borderPx} solid black;
-  &:hover {
-    background-color: rgb(240, 240, 240);
-    cursor: pointer;
-  }
+  ${(props) =>
+    !props.isTop &&
+    css`
+      &:hover {
+        background-color: rgb(240, 240, 240);
+        cursor: pointer;
+      }
+    `}
 `;
 const BoardBoxPostItem = styled.p`
   width: ${(props) => props.width};

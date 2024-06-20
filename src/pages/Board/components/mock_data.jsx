@@ -10,8 +10,8 @@
 //   },
 //   views: int
 //   createdAt: DateTime
-//   isSecret: boolean
-//   isNotification: boolean
+//   secret: boolean
+//   notification: boolean
 //   replies: [
 //       ReplyResponseDTO
 //   ]
@@ -22,7 +22,7 @@
 //   id: long
 //   content: String
 //   author: UserResponseDTO
-//   isSecret: boolean
+//   secret: boolean
 //   createdAt: DateTime
 // }
 // 유저
@@ -44,8 +44,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: true,
+    secret: false,
+    notification: true,
     replies: [{}],
   },
   {
@@ -59,8 +59,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: true,
+    secret: false,
+    notification: true,
     replies: [{}],
   },
   {
@@ -74,8 +74,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: true,
+    secret: false,
+    notification: true,
     replies: [{}],
   },
   {
@@ -89,8 +89,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
+    secret: false,
+    notification: false,
     replies: [{}],
   },
   {
@@ -104,8 +104,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
+    secret: false,
+    notification: false,
     replies: [{}],
   },
   {
@@ -119,8 +119,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
+    secret: false,
+    notification: false,
     replies: [{}],
   },
   {
@@ -134,8 +134,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
+    secret: false,
+    notification: false,
     replies: [{}],
   },
   {
@@ -149,8 +149,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
+    secret: false,
+    notification: false,
     replies: [{}],
   },
   {
@@ -164,23 +164,8 @@ export const PostItem = [
     },
     views: 0,
     createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
-    replies: [{}],
-  },
-  {
-    id: 10,
-    title: "테스트",
-    content: "테스트",
-    author: {
-      id: "이찬민",
-      username: "이찬민",
-      email: "dlcksals87@gmail.com",
-    },
-    views: 0,
-    createdAt: "2024-06-18T20:39:26.070707",
-    isSecret: false,
-    isNotification: false,
+    secret: false,
+    notification: false,
     replies: [{}],
   },
 ];

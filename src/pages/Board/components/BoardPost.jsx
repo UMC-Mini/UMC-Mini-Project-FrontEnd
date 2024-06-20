@@ -13,10 +13,11 @@ function BoardPost(props) {
     author,
     views, // 안 씀
     createdAt, // 안 씀
-    isSecret,
-    isNotification,
+    secret,
+    notification,
     replies, // 안 씀
     isHeader,
+    isTop,
   } = props;
 
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function BoardPost(props) {
       setMarginRight([0, 0, 0, 0, 0]);
     }
 
-    if (isNotification) {
+    if (notification) {
       setBorderPx("2px");
     } else {
       setBorderPx("1px");
@@ -51,10 +52,11 @@ function BoardPost(props) {
     <S.BoardBoxPost
       key={id}
       borderPx={borderPx}
-      onClick={() => navigate(`/board/post/` + id)}
+      onClick={() => !isTop && navigate(`/board/post/` + id)}
+      isTop={isTop}
     >
       <S.BoardBoxPostItem width={width[0]} marginRight={marginRight[0]}>
-        {isNotification ? <TiPin></TiPin> : id}
+        {notification ? <TiPin></TiPin> : id}
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[1]} marginRight={marginRight[1]}>
         {title}
