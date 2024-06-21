@@ -41,26 +41,18 @@ const ComentWriteBoxButton = styled.button`
   color: white;
   font-size: 18px;
   font-weight: 600;
+
+  &:hover {
+    background-color: #186dec;
+    cursor: pointer;
+  }
 `;
 
 const ComentListBox = styled.ul`
   width: 80%;
   height: 700px;
-  padding-top: 10%;
   margin-top: 5%;
-  border: 1px solid #999999;
-`;
-
-const ComentListItem = styled.li`
-  width: 80%;
-  height: 100px;
-  display: flex;
-`;
-
-const ComentListItemReply = styled.li`
-  width: 70%;
-  height: 100px;
-  display: flex;
+  -webkit-padding-start: 0px; // list 태그의 왼쪽 자동 여백 삭제용
 `;
 
 export {
@@ -71,5 +63,4 @@ export {
   ComentWriteBoxInput,
   ComentWriteBoxButton,
   ComentListBox,
-  ComentListItem,
 };
