@@ -14,7 +14,9 @@ function Navbar() {
         </S.leftBoxText>
       </S.leftBox>
       <S.rightBox>
-        <S.rightBoxText>마이페이지</S.rightBoxText>
+        <S.rightBoxText onClick={() => navigate("/MyPage")}>
+          마이페이지
+        </S.rightBoxText>
         <S.rightBoxPerson />
       </S.rightBox>
     </S.Container>
