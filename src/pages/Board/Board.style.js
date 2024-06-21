@@ -47,12 +47,18 @@ const BoardBoxPageForwardButton = styled(IoIosArrowForward)`
   width: 30px;
   height: 30px;
   border: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const BoardBoxPageBackButton = styled(IoIosArrowBack)`
   width: 30px;
   height: 30px;
   border: none;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const SearchBoxInput = styled.input`

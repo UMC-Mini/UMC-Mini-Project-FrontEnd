@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./PostComent.style";
 
 function PostComent(props) {
+  // coment = 댓글, reply = 대댓글
   const { isReply } = props;
   return (
     <S.Container isReply={isReply}>
