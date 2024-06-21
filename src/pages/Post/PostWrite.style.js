@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { MdLockOutline } from "react-icons/md";
 
 const Container = styled.div`
   width: 100vw;
@@ -82,13 +81,13 @@ const SecretBox = styled.div`
   width: 90%;
   height: 40%;
 `;
-const SecretBoxTextContainer = styled.div`
-  display: flex;
-  gap: 5px;
-`;
-const SecretBoxIcon = styled(MdLockOutline)``;
-const SecretBoxText = styled.div``;
-const SecretBoxRadio = styled.input``;
+// const SecretBoxTextContainer = styled.div`
+//   display: flex;
+//   gap: 5px;
+// `;
+// const SecretBoxIcon = styled(MdLockOutline)``;
+// const SecretBoxText = styled.div``;
+// const SecretBoxRadio = styled.input``;
 
 const SecretBoxPWInput = styled.input`
   width: 100%;
@@ -127,10 +126,10 @@ export {
   AttachmentBoxText,
   SubmitBox,
   SecretBox,
-  SecretBoxTextContainer,
-  SecretBoxIcon,
-  SecretBoxText,
-  SecretBoxRadio,
+  // SecretBoxTextContainer,
+  // SecretBoxIcon,
+  // SecretBoxText,
+  // SecretBoxRadio,
   SecretBoxPWInput,
   SubmitBoxButton,
 };

@@ -4,11 +4,28 @@ import BoardPost from "./components/BoardPost";
 import { PostItem } from "./components/mock_data";
 import Navbar from "./components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import { defaultInstance } from "../../api/axiosInstance";
+import { useEffect } from "react";
 
 export default function Board() {
   const HeaderUser = {
     username: "작성자",
   };
+
+  const getAllPosts = async () => {
+    const { data } = await defaultInstance.get("/posts");
+    console.log(data);
+  };
+
+  // const getSearchKeywordPosts = async () => {
+  //   const { data } = await defaultInstance.get("/posts");
+  //   console.log(data);
+  // };
+
+  useEffect(() => {
+    getAllPosts();
+    // getSearchKeywordPosts();
+  }, []);
 
   const navigate = useNavigate();
   return (

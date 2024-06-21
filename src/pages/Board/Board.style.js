@@ -57,7 +57,7 @@ const BoardBoxPageBackButton = styled(IoIosArrowBack)`
 
 const SearchBoxInput = styled.input`
   width: 30%;
-  height: 30%;
+  height: 40%;
   border-radius: 10px;
 `;
 const SearchBoxButton = styled(CiSearch)`

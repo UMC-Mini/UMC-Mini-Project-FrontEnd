@@ -1,10 +1,17 @@
 import axios from "axios";
 
-const BASE_URL = "주소~";
+const BASE_URL = "http://3.39.75.215:8080/api/v1";
 
 // 단순 get요청으로 인증값이 필요없는 경우
-const axiosApi = (url, options) => {
-  const instance = axios.create({ baseURL: url, ...options });
+const axiosApi = (url) => {
+  const instance = axios.create({
+    baseURL: url,
+    headers: {
+      "Content-Type": "application/json",
+      // "X-CSRFToken": csrftoken,
+    },
+    // ...options,
+  });
   return instance;
 };
 
