@@ -48,6 +48,8 @@ function BoardPost(props) {
     }
   }, [isHeader]);
 
+  const date = new Date(createdAt);
+
   return (
     <S.BoardBoxPost
       key={id}
@@ -62,10 +64,17 @@ function BoardPost(props) {
         {title}
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[2]} marginRight={marginRight[2]}>
-        {author.username}
+        {/* 여기에 author.username 이거 때문에 map 오류났었음 */}
+        {!isTop ? "나중에 추가" : "작성자"}
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[3]} marginRight={marginRight[3]}>
-        {createdAt}
+        {!isTop
+          ? date.getFullYear().toString() +
+            "/" +
+            date.getMonth().toString() +
+            "/" +
+            date.getDate().toString()
+          : "작성시간"}
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[4]} marginRight={marginRight[4]}>
         {views}
