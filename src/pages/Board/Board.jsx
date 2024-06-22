@@ -7,13 +7,18 @@ import { useNavigate } from "react-router-dom";
 import { defaultInstance } from "../../api/axiosInstance";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPosts, setCurrentPage } from "../../state/post/postSlice";
+import {
+  setPosts,
+  setCurrentPage,
+  setTotalPage,
+} from "../../state/post/postSlice";
 
 // 남은거 = 검색 구현 , 페이지이동 구현, 글작성 구현, 포스트 상세 페이지 통신데이터로 구현, 댓글쓰기 구현, 비밀글/댓글 체크 추적해서 post
 
 export default function Board() {
   const recentPosts = useSelector((state) => state.post.posts);
   const currentPage = useSelector((state) => state.post.currentPage);
+  const totalPage = useSelector((state) => state.post.totalPage);
   const dispatch = useDispatch();
 
   const HeaderUser = {
@@ -22,7 +27,8 @@ export default function Board() {
 
   const getPosts = async () => {
     const { data } = await defaultInstance.get("/posts");
-    dispatch(setPosts(data.result));
+    dispatch(setPosts(data.result.list));
+    dispatch(setTotalPage(data.result.totalPage));
   };
 
   // const getSearchKeywordPosts = async () => {
@@ -35,8 +41,8 @@ export default function Board() {
     const { data } = await defaultInstance.get(
       "/posts?search=" + e.target[0].value
     );
-    console.log(data.result);
-    dispatch(setPosts(data.result));
+    console.log(data.result.list);
+    dispatch(setPosts(data.result.list));
   };
   const pagePrevHandler = async (e) => {
     if (currentPage === 1) {
@@ -45,13 +51,16 @@ export default function Board() {
     const prevPage = currentPage - 1;
     const { data } = await defaultInstance.get("/posts?page=" + prevPage);
     dispatch(setCurrentPage(prevPage));
-    dispatch(setPosts(data.result));
+    dispatch(setPosts(data.result.list));
   };
   const pageNextHandler = async (e) => {
+    if (currentPage === totalPage) {
+      return;
+    }
     const nextPage = currentPage + 1;
     const { data } = await defaultInstance.get("/posts?page=" + nextPage);
     dispatch(setCurrentPage(nextPage));
-    dispatch(setPosts(data.result));
+    dispatch(setPosts(data.result.list));
   };
 
   useEffect(() => {

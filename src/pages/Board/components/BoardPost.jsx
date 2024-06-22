@@ -65,7 +65,7 @@ function BoardPost(props) {
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[2]} marginRight={marginRight[2]}>
         {/* 여기에 author.username 이거 때문에 map 오류났었음 */}
-        {!isTop ? "나중에 추가" : "작성자"}
+        {!isTop ? author.nickname : "작성자"}
       </S.BoardBoxPostItem>
       <S.BoardBoxPostItem width={width[3]} marginRight={marginRight[3]}>
         {!isTop

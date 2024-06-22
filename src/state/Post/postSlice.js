@@ -20,6 +20,8 @@ const initialState = {
   // 모든 posts 저장하는 state
   posts: [],
   currentPage: 1,
+  currentPost: {},
+  totalPage: 1,
 };
 
 // 로직 : action -> dispatch(useDispatch)로 실행
@@ -35,8 +37,17 @@ const postSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+
+    setTotalPage: (state, action) => {
+      state.totalPage = action.payload;
+    },
+
+    setCurrentPost: (state, action) => {
+      state.currentPost = action.payload;
+    },
   },
 });
 
-export const { setPosts, setCurrentPage } = postSlice.actions;
+export const { setPosts, setCurrentPage, setTotalPage, setCurrentPost } =
+  postSlice.actions;
 export default postSlice.reducer; // 리듀서를 통째로 반환해야 emutable한 기능 사용가능
