@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { defaultInstance } from "../../api/axiosInstance";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPosts } from "../../state/post/postSlice";
+import { setPosts, setCurrentPage } from "../../state/post/postSlice";
 
 // 남은거 = 검색 구현 , 페이지이동 구현, 글작성 구현, 포스트 상세 페이지 통신데이터로 구현, 댓글쓰기 구현, 비밀글/댓글 체크 추적해서 post
 
@@ -20,14 +20,14 @@ export default function Board() {
     username: "작성자",
   };
 
-  const getAllPosts = async () => {
+  const getPosts = async () => {
     const { data } = await defaultInstance.get("/posts");
     dispatch(setPosts(data.result));
   };
 
-  const getSearchKeywordPosts = async () => {
-    const { data } = await defaultInstance.get("/posts");
-  };
+  // const getSearchKeywordPosts = async () => {
+  //   const { data } = await defaultInstance.get("/posts");
+  // };
 
   const searchSubmitHandler = async (e) => {
     e.preventDefault();
@@ -38,11 +38,24 @@ export default function Board() {
     console.log(data.result);
     dispatch(setPosts(data.result));
   };
-  const pageNextHandler = (e) => {};
-  const pagePrevHandler = (e) => {};
+  const pagePrevHandler = async (e) => {
+    if (currentPage === 1) {
+      return;
+    }
+    const prevPage = currentPage - 1;
+    const { data } = await defaultInstance.get("/posts?page=" + prevPage);
+    dispatch(setCurrentPage(prevPage));
+    dispatch(setPosts(data.result));
+  };
+  const pageNextHandler = async (e) => {
+    const nextPage = currentPage + 1;
+    const { data } = await defaultInstance.get("/posts?page=" + nextPage);
+    dispatch(setCurrentPage(nextPage));
+    dispatch(setPosts(data.result));
+  };
 
   useEffect(() => {
-    getAllPosts();
+    getPosts();
     // getSearchKeywordPosts();
   }, [dispatch]);
 
@@ -69,9 +82,15 @@ export default function Board() {
         </S.BoardBoxPostContainer>
       </S.BoardBox>
       <S.BoardBoxPageButtonContainer>
-        <S.BoardBoxPageBackButton></S.BoardBoxPageBackButton>
+        <S.BoardBoxPageBackButton
+          currentPage={currentPage}
+          onClick={(e) => pagePrevHandler(e)}
+        ></S.BoardBoxPageBackButton>
         <div>{currentPage}</div>
-        <S.BoardBoxPageForwardButton></S.BoardBoxPageForwardButton>
+        <S.BoardBoxPageForwardButton
+          currentPage={currentPage}
+          onClick={(e) => pageNextHandler(e)}
+        ></S.BoardBoxPageForwardButton>
       </S.BoardBoxPageButtonContainer>
       <S.SearchBox>
         <S.SearchBoxForm onSubmit={(e) => searchSubmitHandler(e)}>

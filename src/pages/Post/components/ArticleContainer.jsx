@@ -14,7 +14,10 @@ function ArticleContainer(props) {
   };
 
   useEffect(() => {
-    getPostContent(postID);
+    if (!isWriting) {
+      getPostContent(postID);
+    }
+    
   }, []);
 
   return (

@@ -32,9 +32,11 @@ const postSlice = createSlice({
       state.posts = action.payload;
     },
 
-    setCurrentPage: (state, action) => {},
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setPosts } = postSlice.actions;
+export const { setPosts, setCurrentPage } = postSlice.actions;
 export default postSlice.reducer; // 리듀서를 통째로 반환해야 emutable한 기능 사용가능

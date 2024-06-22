@@ -17,9 +17,9 @@ function PostWrite() {
         <S.FooterBox>
           {/* 파일 첨부 작동 안함 */}
           <S.AttachmentBox>
-            <label for="file">
+            {/* <label>
               <S.AttachmentBoxButton>파일 선택</S.AttachmentBoxButton>
-            </label>
+            </label> */}
             <S.AttachmentBoxInput
               type="file"
               multiple

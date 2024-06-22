@@ -49,15 +49,6 @@ const BoardBoxPostContainer = styled.ul`
 const BoardBoxPageButtonContainer = styled.div`
   display: flex;
 `;
-const BoardBoxPageForwardButton = styled(IoIosArrowForward)`
-  width: 30px;
-  height: 30px;
-  border: none;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const BoardBoxPageBackButton = styled(IoIosArrowBack)`
   width: 30px;
   height: 30px;
@@ -65,12 +56,26 @@ const BoardBoxPageBackButton = styled(IoIosArrowBack)`
   &:hover {
     cursor: pointer;
   }
+  color: ${(props) => (props.currentPage == 1 ? "#999999" : "")};
+  margin-right: 10px;
+`;
+const BoardBoxPageForwardButton = styled(IoIosArrowForward)`
+  width: 30px;
+  height: 30px;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+  margin-left: 10px;
 `;
 
 const SearchBoxInput = styled.input`
-  width: 30%;
-  height: 40%;
+  width: 35%;
+  height: 50%;
   border-radius: 10px;
+  position: relative;
+  left: 2vw;
+  top: 1.5px;
 `;
 const SearchBoxButton = styled(CiSearch)`
   margin-right: 60%;
