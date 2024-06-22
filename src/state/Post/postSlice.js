@@ -19,7 +19,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   // 모든 posts 저장하는 state
   posts: [],
-  postSearchKeyword: "",
+  currentPage: 1,
 };
 
 // 로직 : action -> dispatch(useDispatch)로 실행
@@ -31,6 +31,8 @@ const postSlice = createSlice({
     setPosts: (state, action) => {
       state.posts = action.payload;
     },
+
+    setCurrentPage: (state, action) => {},
   },
 });
 

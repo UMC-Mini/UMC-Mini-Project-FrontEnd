@@ -8,6 +8,7 @@ const axiosApi = (url) => {
     baseURL: url,
     headers: {
       "Content-Type": "application/json",
+      Authorization: "Bearer " + import.meta.env.VITE_CARPOOL_API_KEY,
       // "X-CSRFToken": csrftoken,
     },
     // ...options,

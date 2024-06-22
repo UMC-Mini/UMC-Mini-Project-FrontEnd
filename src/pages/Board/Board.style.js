@@ -30,6 +30,12 @@ const SearchBox = styled.div`
   /* justify-content: ; */
   align-items: center;
 `;
+const SearchBoxForm = styled.form`
+  width: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
 
 const BoardBoxHeader = styled.h1``;
 const BoardBoxPostContainer = styled.ul`
@@ -98,6 +104,7 @@ export {
   BoardBoxPageButtonContainer,
   BoardBoxPageForwardButton,
   BoardBoxPageBackButton,
+  SearchBoxForm,
   SearchBoxInput,
   SearchBoxButton,
   SearchBoxWritingButton,

@@ -71,7 +71,7 @@ function BoardPost(props) {
         {!isTop
           ? date.getFullYear().toString() +
             "/" +
-            date.getMonth().toString() +
+            (date.getMonth() + 1).toString() +
             "/" +
             date.getDate().toString()
           : "작성시간"}
