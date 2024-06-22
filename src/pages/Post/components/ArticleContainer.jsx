@@ -18,8 +18,8 @@ function ArticleContainer(props) {
   const currentPost = useSelector((state) => state.post.currentPost);
   const currentPostWriteTime = new Date(currentPost.createdAt);
 
-  const getPostContent = async (id) => {
-    const { data } = await defaultInstance.get("/posts/" + id);
+  const getPostContent = async (postID) => {
+    const { data } = await defaultInstance.get("/posts/" + postID);
     console.log(data);
     dispatch(setCurrentPost(data.result));
   };
@@ -28,7 +28,7 @@ function ArticleContainer(props) {
     if (!isWriting) {
       getPostContent(postID);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <S.BoardBox>
@@ -41,7 +41,7 @@ function ArticleContainer(props) {
         <>
           <S.HeaderBox>
             <div>{currentPost.title}</div>
-            <S.HeaderUserBox>{`작성자:${currentPost.author.nickname} 작성날짜:${
+            <S.HeaderUserBox>{`작성자:${currentPost.author} 작성날짜:${
               currentPostWriteTime.getFullYear().toString() +
               "-" +
               (currentPostWriteTime.getMonth() + 1).toString() +

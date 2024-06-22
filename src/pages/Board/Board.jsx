@@ -13,7 +13,7 @@ import {
   setTotalPage,
 } from "../../state/post/postSlice";
 
-// 남은거 = 검색 구현 , 페이지이동 구현, 글작성 구현, 포스트 상세 페이지 통신데이터로 구현, 댓글쓰기 구현, 비밀글/댓글 체크 추적해서 post
+// 남은거 = 검색 구현 (0) , 페이지이동 구현 (0), 글작성 구현(x), 포스트 상세 페이지 통신데이터로 구현 (0), 댓글쓰기 구현, 비밀글/댓글 체크 추적해서 post
 
 export default function Board() {
   const recentPosts = useSelector((state) => state.post.posts);
@@ -35,7 +35,7 @@ export default function Board() {
   //   const { data } = await defaultInstance.get("/posts");
   // };
 
-  const searchSubmitHandler = async (e) => {
+  const getSearchKeywordPosts = async (e) => {
     e.preventDefault();
     console.log(e.target[0].value);
     const { data } = await defaultInstance.get(
@@ -65,7 +65,6 @@ export default function Board() {
 
   useEffect(() => {
     getPosts();
-    // getSearchKeywordPosts();
   }, [dispatch]);
 
   const navigate = useNavigate();
@@ -97,12 +96,12 @@ export default function Board() {
         ></S.BoardBoxPageBackButton>
         <div>{currentPage}</div>
         <S.BoardBoxPageForwardButton
-          currentPage={currentPage}
+          disable={currentPage == totalPage}
           onClick={(e) => pageNextHandler(e)}
         ></S.BoardBoxPageForwardButton>
       </S.BoardBoxPageButtonContainer>
       <S.SearchBox>
-        <S.SearchBoxForm onSubmit={(e) => searchSubmitHandler(e)}>
+        <S.SearchBoxForm onSubmit={(e) => getSearchKeywordPosts(e)}>
           <S.SearchBoxInput></S.SearchBoxInput>
           <S.SearchBoxButton></S.SearchBoxButton>
         </S.SearchBoxForm>

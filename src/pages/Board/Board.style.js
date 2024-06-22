@@ -66,6 +66,7 @@ const BoardBoxPageForwardButton = styled(IoIosArrowForward)`
   &:hover {
     cursor: pointer;
   }
+  color: ${(props) => (props.disable ? "#999999" : "")};
   margin-left: 10px;
 `;
 

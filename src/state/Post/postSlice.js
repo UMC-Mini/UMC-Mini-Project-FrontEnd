@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 // post
 // {
 //   id: long
@@ -21,6 +20,13 @@ const initialState = {
   posts: [],
   currentPage: 1,
   currentPost: {},
+  currentPostComents: [],
+  postWritingInfo: {},
+  comentWritingInfo: {
+    content: "",
+    secret: false,
+    postId: null,
+  }, // content, secret, postID, parentID
   totalPage: 1,
 };
 
@@ -45,9 +51,28 @@ const postSlice = createSlice({
     setCurrentPost: (state, action) => {
       state.currentPost = action.payload;
     },
+
+    setCurrentPostComents: (state, action) => {
+      state.currentPostComents = action.payload;
+    },
+
+    setPostWritingInfo: (state, action) => {
+      state.postWritingInfo = action.payload;
+    },
+
+    setComentWritingInfo: (state, action) => {
+      state.comentWritingInfo = action.payload;
+    },
   },
 });
 
-export const { setPosts, setCurrentPage, setTotalPage, setCurrentPost } =
-  postSlice.actions;
+export const {
+  setPosts,
+  setCurrentPage,
+  setTotalPage,
+  setCurrentPost,
+  setCurrentPostComents,
+  setPostWritingInfo,
+  setComentWritingInfo,
+} = postSlice.actions;
 export default postSlice.reducer; // 리듀서를 통째로 반환해야 emutable한 기능 사용가능

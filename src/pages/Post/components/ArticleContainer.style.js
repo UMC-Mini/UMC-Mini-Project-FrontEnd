@@ -41,13 +41,14 @@ const HeaderBox = styled.div`
 `;
 
 const HeaderUserBox = styled.div`
-  width: 40%;
+  /* width: 35%; */
   height: 100%;
   /* border: none; */
   color: #999999;
   font-size: 12px;
   display: flex;
   align-items: flex-end;
+  align-items: center;
 `;
 
 const ContentBox = styled.div`
