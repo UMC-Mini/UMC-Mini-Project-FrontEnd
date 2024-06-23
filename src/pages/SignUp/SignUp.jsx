@@ -3,7 +3,6 @@ import { Input, LoginContainer, SignUpButton, Logo, Shell2, Mes} from "./SignUp.
 import { useNavigate } from "react-router-dom";
 import { loginData } from "../../redux/userSlice";
 import axios from "axios";
-import logo from "/logo_스뮤풀1.png";
 
 
 export default function SignUp() {
@@ -139,7 +138,7 @@ export default function SignUp() {
   return (
     <Shell2>
       <LoginContainer>
-        <Logo src={logo} alt="Logo" onClick={()=>{navigate("/")}}/> 
+        <Logo src={`${import.meta.env.VITE_PUBLIC_URL}logo_smupool1.png`} alt="Logo" onClick={()=>{navigate("/")}}/> 
         <br></br>
         <h1> 회원가입</h1>
         <br></br>

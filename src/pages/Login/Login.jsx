@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../redux/userSlice";
 import axios from "axios";
-import logo from "/logo_스뮤풀1.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -51,7 +50,7 @@ export default function Login() {
   return (
     <Shell>
     <LoginContainer>
-      <Logo src={logo} alt="Logo" onClick={()=>{navigate("/")}}/> 
+    <Logo src={`${import.meta.env.VITE_PUBLIC_URL}logo_smupool1.png`} alt="Logo" onClick={() => navigate("/")} />
       <br></br>
       <h1> 로그인 </h1>
       <br></br>
