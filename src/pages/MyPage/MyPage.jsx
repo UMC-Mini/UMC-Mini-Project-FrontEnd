@@ -97,12 +97,12 @@ export default function MyPage() {
   }, [isLogin, navigate]);
 
   useEffect(() => {
-    if ( nicknameCheck || pwCheck ) {
+    if ( (nicknameCheck || pwCheck) && (pwMessage.trim() === "") && (nicknameMessage.trim() === "")) {
       setBtn(true);
     } else {
       setBtn(false);
     }
-  }, [nicknameCheck, pwCheck]);
+  }, [nicknameCheck, pwCheck, nicknameMessage, pwMessage]);
 
   // 로그아웃
   const handleLogout = () => {
