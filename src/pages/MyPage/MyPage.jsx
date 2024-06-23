@@ -15,7 +15,8 @@ import {
   Shell4,
   Shell5,
   FooterWrapper,
-  Mes
+  Mes,
+  Shell6
 } from "./MyPage.style";
 import { FaCircleUser } from "react-icons/fa6";
 import { deleteAction, logoutAction, modifyAction } from "../../redux/userSlice";
@@ -31,8 +32,7 @@ export default function MyPage() {
   const userName = localStorage.getItem("userName");
   const userNickname = localStorage.getItem("userNickname");
   const token = localStorage.getItem("accessToken");
-  console.log(token);
-
+  
   //body에 입력되는 state
   const [nickname, setNickname] = useState("");
   const [pw, setPw] = useState("");
@@ -56,6 +56,9 @@ export default function MyPage() {
       setNicknameCheck(false);
     } else if (!regExp.test(value)) {
       setNicknameMessage("문자로 입력해주세요!");
+      setNicknameCheck(false);
+    } else if (userNickname === value) {
+      setNicknameMessage("닉네임이 기존과 같습니다!");
       setNicknameCheck(false);
     } else {
       setNicknameMessage("");
@@ -143,6 +146,9 @@ export default function MyPage() {
       if (nicknameCheck && nickname.trim() !== "") {
         dispatch(modifyAction({ userNickname: nickname }));
       }
+      if (pwCheck && pw.trim() !== "") {
+        dispatch(logoutAction());
+      }
       setNickname("");
       setPw("");
       navigate("/mypage");
@@ -158,32 +164,35 @@ export default function MyPage() {
       <Navbar />
       <Shell3>
         <Mypagecontainer>
-          <FaCircleUser size={100} />
-          <Shell4>
-            <Info>
-              <h1>내 정보</h1>
-              <br />
-              <h2>{userNickname} {userName}님</h2>
-              <h2>상명대학교 재학</h2>
-              <br />
-            </Info>
-            <Infochange>
-              비밀번호 변경
-              <Input
-                type="password"
-                value={pw}
-                onChange={(e) => checkPw(e.target.value.trim())}
-              />
-              <Mes>{pwMessage}</Mes>
-              채팅 닉네임 변경
-              <Input
-                type="text"
-                value={nickname}
-                onChange={(e) => checkNickname(e.target.value.trim())}
-              />
-              <Mes>{nicknameMessage}</Mes>
-            </Infochange>
-          </Shell4>
+          <Shell6>
+            <FaCircleUser size={100} />
+            <br></br>
+            <Shell4>
+              <Info>
+                <h1>내 정보</h1>
+                <br />
+                <h2>{userNickname} {userName}님</h2>
+                <h2>상명대학교 재학</h2>
+                <br />
+              </Info>
+              <Infochange>
+                비밀번호 변경
+                <Input
+                  type="password"
+                  value={pw}
+                  onChange={(e) => checkPw(e.target.value.trim())}
+                />
+                <Mes>{pwMessage}</Mes>
+                채팅 닉네임 변경
+                <Input
+                  type="text"
+                  value={nickname}
+                  onChange={(e) => checkNickname(e.target.value.trim())}
+                />
+                <Mes>{nicknameMessage}</Mes>
+              </Infochange>
+            </Shell4>
+          </Shell6>
           <Shell5>
             <Button onClick={handleLogout}>로그아웃</Button>
             <Button onClick={handleDelete}>회원탈퇴</Button>
@@ -192,8 +201,8 @@ export default function MyPage() {
         <FooterWrapper>
           <FooterContainer>
             <FooterLinks>
-              <span>이용 약관 v</span>
-              <span>개인정보처리방침 v</span>
+              <span>이용 약관</span>
+              <span>개인정보처리방침</span>
             </FooterLinks>
             <SaveButton disabled={!btn} onClick={handleModify}>저장</SaveButton>
           </FooterContainer>

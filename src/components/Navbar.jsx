@@ -12,9 +12,9 @@ export default function Navbar() {
                     <h1 onClick={() => { navigate("/") }}>SMUPOOL</h1>
                     <h2>마이페이지</h2>
                 </LeftContainer>
-                <RightContainer>
-                    <h3 onClick={() => { navigate("/mypage") }}>마이페이지</h3>
-                    <FaCircleUser size={40}></FaCircleUser>
+                <RightContainer onClick={() => { navigate("/mypage") }}>
+                    <h3>마이페이지</h3>
+                    <FaCircleUser size={60}></FaCircleUser>
                 </RightContainer>
             </LogoBox>
         </Navbarcontainer>

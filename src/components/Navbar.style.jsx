@@ -8,6 +8,15 @@ export const Navbarcontainer = styled.div`
     align-items: center;
     margin: 0;
     border-radius: 5px;
+
+    @media (min-width: 501px) {
+      max-width: 100%;
+    }
+
+    @media (max-width: 500px) {
+      max-width: 500px;
+      margin: 0 auto;
+    }
 `;
 
 export const LogoBox = styled.div`
@@ -48,9 +57,14 @@ export const RightContainer = styled.div`
     color: black;
     margin-right: 10px;
     cursor: pointer;
+
+    @media (max-width: 500px) {
+      display: none;
+    }
   }
 
   > svg {
     margin-right: 10px;
+    cursor: pointer;
   }
 `;
