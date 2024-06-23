@@ -1,18 +1,55 @@
 import { createSlice } from "@reduxjs/toolkit";
 // post
 // {
-//   id: long
-//   title: String
-//   content: String
-//   author: UserResponseDTO
-//   views: int
-//   createdAt: DateTime
-//   isSecret: boolean
-//   isNotification: boolean
-//   replies: [
-//       ReplyResponseDTO
-//   ]
+//   "id": 0,
+// "content": "string",
+// "author": {
+//   "userId": 0,
+//   "name": "string",
+//   "nickname": "string",
+//   "updateAt": "2024-06-23T08:40:04.326Z",
+//   "createAt": "2024-06-23T08:40:04.326Z"
+// },
+// "secret": true,
+// "parentId": 0,
+// "createdAt": "2024-06-23T08:40:04.326Z",
+// "children": [
+//   "string"
+// ]
 //   // file 추가…
+// }
+
+// replies
+// {
+//   "id": 11,
+//   "content": "댓글 테스트",
+//   "author": {
+//       "userId": 2,
+//       "name": "string",
+//       "nickname": "string",
+//       "updateAt": "2024-06-23T09:09:43.461552",
+//       "createAt": "2024-06-23T09:09:30.26468"
+//   },
+//   "secret": false,
+//   "parentId": null,
+//   "createdAt": "2024-06-23T12:46:11.968792",
+//   "children": [
+//       {
+//           "id": 12,
+//           "content": "ㄴㅇㄹㅇㄴㄹㄴㄹㅇㄴㄹ",
+//           "author": {
+//               "userId": 2,
+//               "name": "string",
+//               "nickname": "string",
+//               "updateAt": "2024-06-23T09:09:43.461552",
+//               "createAt": "2024-06-23T09:09:30.26468"
+//           },
+//           "secret": false,
+//           "parentId": 11,
+//           "createdAt": "2024-06-23T12:46:18.076014",
+//           "children": null
+//       }
+//   ]
 // }
 
 const initialState = {
@@ -20,14 +57,25 @@ const initialState = {
   posts: [],
   currentPage: 1,
   currentPost: {},
+  currentPassword: "", // 포스트 하나 가져올 떄
+  currentPostId: null,
   currentPostComents: [],
-  postWritingInfo: {},
+  currentComentId: null,
+  postWritingInfo: {
+    title: "",
+    content: "",
+    secret: false,
+    // password: "",
+    notification: false,
+  },
   comentWritingInfo: {
     content: "",
     secret: false,
     postId: null,
+    // parentId: null,
   }, // content, secret, postID, parentID
   totalPage: 1,
+  pwModalOpen: false,
 };
 
 // 로직 : action -> dispatch(useDispatch)로 실행
@@ -52,8 +100,21 @@ const postSlice = createSlice({
       state.currentPost = action.payload;
     },
 
+    setCurrentPassword: (state, action) => {
+      state.currentPassword = action.payload;
+    },
+
+    setCurrentPostId: (state, action) => {
+      state.currentPostId = action.payload;
+      console.log(state.currentPostId, action.payload);
+    },
+
     setCurrentPostComents: (state, action) => {
       state.currentPostComents = action.payload;
+    },
+
+    setCurrentComentId: (state, action) => {
+      state.currentComentId = action.payload;
     },
 
     setPostWritingInfo: (state, action) => {
@@ -63,6 +124,10 @@ const postSlice = createSlice({
     setComentWritingInfo: (state, action) => {
       state.comentWritingInfo = action.payload;
     },
+
+    setPwModalOpen: (state, action) => {
+      state.pwModalOpen = action.payload;
+    },
   },
 });
 
@@ -71,8 +136,12 @@ export const {
   setCurrentPage,
   setTotalPage,
   setCurrentPost,
+  setCurrentPassword,
+  setCurrentPostId,
   setCurrentPostComents,
+  setCurrentComentId,
   setPostWritingInfo,
   setComentWritingInfo,
+  setPwModalOpen,
 } = postSlice.actions;
 export default postSlice.reducer; // 리듀서를 통째로 반환해야 emutable한 기능 사용가능

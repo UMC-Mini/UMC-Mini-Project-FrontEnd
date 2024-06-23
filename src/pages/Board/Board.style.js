@@ -75,13 +75,14 @@ const SearchBoxInput = styled.input`
   height: 50%;
   border-radius: 10px;
   position: relative;
-  left: 2vw;
+  left: 2.5vw;
   top: 1.5px;
 `;
 const SearchBoxButton = styled(CiSearch)`
   margin-right: 60%;
   position: relative;
-  left: -20px;
+  left: -5px;
+  top: 2px;
   /* margin-left: 70%; */
   &:hover {
     cursor: pointer;

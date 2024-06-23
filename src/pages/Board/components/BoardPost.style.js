@@ -16,11 +16,18 @@ const BoardBoxPost = styled.li`
       }
     `}
 `;
-const BoardBoxPostItem = styled.p`
+const BoardBoxPostItem = styled.div`
+  display: flex;
   width: ${(props) => props.width};
   margin-right: ${(props) => props.marginRight};
   font-weight: 600;
   font-size: 18px;
+
+  span {
+    margin-left: 10px;
+    position: relative;
+    top: 1px;
+  }
 `;
 
 export { BoardBoxPost, BoardBoxPostItem };

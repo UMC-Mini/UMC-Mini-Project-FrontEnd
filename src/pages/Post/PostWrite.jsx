@@ -4,40 +4,61 @@ import Navbar from "../Board/components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import SecretBoxTextContainer from "./components/SecretBoxTextContainer";
 import ArticleContainer from "./components/ArticleContainer";
+import { defaultInstance } from "../../api/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+import { setPostWritingInfo } from "../../state/post/postSlice";
 
 function PostWrite() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const postWritingInfo = useSelector((state) => state.post.postWritingInfo);
+
+  // post 작성 api 요청
+  const usePostArticle = async () => {
+    const requestData = postWritingInfo;
+    await defaultInstance.post("/posts", requestData);
+  };
+
+  // 작성 form 제출 이벤트 핸들러
+  const writeSubmitHandler = (e) => {
+    e.preventDefault();
+    usePostArticle();
+    navigate("/board");
+  };
+
+  // 비밀번호 변경 이벤트 핸들러
+  const pwChangeHandler = (e) => {
+    dispatch(
+      setPostWritingInfo({ ...postWritingInfo, password: e.target.value })
+    );
+  };
   return (
     <S.Container>
       <Navbar></Navbar>
       <S.BoardBox>
-        {/* <S.HeaderBox placeholder="제목 입력"></S.HeaderBox>
-        <S.ContentBox placeholder="본문 내용을 입력해주세요"></S.ContentBox> */}
         <ArticleContainer isWriting={true}></ArticleContainer>
         <S.FooterBox>
           {/* 파일 첨부 작동 안함 */}
           <S.AttachmentBox>
             <S.AttachmentBoxButton>파일 선택</S.AttachmentBoxButton>
-
             <S.AttachmentBoxInput
               type="file"
-              multiple
-              accept="image/*"
+              multiple="true" // multiple 로 써도 됨
+              // hidden
             ></S.AttachmentBoxInput>
             {/* <S.AttachmentBoxText>파일 미첨부</S.AttachmentBoxText> */}
           </S.AttachmentBox>
           <S.SubmitBox
-            onSubmit={() => {
-              navigate("/board");
+            onSubmit={(e) => {
+              writeSubmitHandler(e);
             }}
           >
-            {/* <S.SecretBoxTextContainer>
-              <S.SecretBoxIcon></S.SecretBoxIcon>
-              <S.SecretBoxText>비밀글</S.SecretBoxText>
-              <S.SecretBoxRadio type="checkbox"></S.SecretBoxRadio>
-            </S.SecretBoxTextContainer> */}
             <SecretBoxTextContainer isPost={true}></SecretBoxTextContainer>
-            <S.SecretBoxPWInput placeholder="비밀번호를 입력"></S.SecretBoxPWInput>
+            <S.SecretBoxPWInput
+              placeholder="비밀번호를 입력"
+              onChange={(e) => pwChangeHandler(e)}
+              disabled={!postWritingInfo.secret}
+            ></S.SecretBoxPWInput>
             <S.SubmitBoxButton>작성</S.SubmitBoxButton>
           </S.SubmitBox>
         </S.FooterBox>

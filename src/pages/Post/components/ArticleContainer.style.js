@@ -10,6 +10,12 @@ const BoardBox = styled.div`
   align-items: center;
 `;
 
+// const ArticleBox = styled.form`
+//   width: 100%;
+//   height: 60vh;
+  
+// `;
+
 const HeaderBoxWrite = styled.input`
   width: 80%;
   height: 15%;
@@ -51,6 +57,21 @@ const HeaderUserBox = styled.div`
   align-items: center;
 `;
 
+const manageBox = styled.div`
+  position: relative;
+  top: 5vh;
+  left: 30vw;
+  button {
+    color: #999999;
+    border: none;
+    text-decoration: underline;
+    background-color: white;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+`
+
 const ContentBox = styled.div`
   width: 80%;
   height: 70%;
@@ -61,9 +82,11 @@ const ContentBox = styled.div`
 
 export {
   BoardBox,
+  // ArticleBox,
   HeaderBoxWrite,
   ContentBoxWrite,
   HeaderBox,
   HeaderUserBox,
+  manageBox,
   ContentBox,
 };

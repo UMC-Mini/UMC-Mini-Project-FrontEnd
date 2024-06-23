@@ -1,6 +1,9 @@
 import React from "react";
 import * as S from "./SecretBoxTextContainer.style";
-import { setComentWritingInfo } from "../../../state/post/postSlice";
+import {
+  setComentWritingInfo,
+  setPostWritingInfo,
+} from "../../../state/post/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function SecretBoxTextContainer(props) {
@@ -11,13 +14,18 @@ function SecretBoxTextContainer(props) {
   const comentWritingInfo = useSelector(
     (state) => state.post.comentWritingInfo
   );
-  // console.log(comentWritingInfo);
+  const postWritingInfo = useSelector((state) => state.post.postWritingInfo);
 
-  // 비밀 글/댓글 on-off
+  // slice의 정보 중 secret만 바꿈 - 비밀 글/댓글 on-off
   const secretRadioBoxClickHandler = () => {
-    const newElem = { ...comentWritingInfo, secret: !comentWritingInfo.secret };
-    dispatch(setComentWritingInfo(newElem));
-    // console.log(comentWritingInfo);
+    const newComentElem = {
+      ...comentWritingInfo,
+      secret: !comentWritingInfo.secret,
+    };
+    const newPostElem = { ...postWritingInfo, secret: !postWritingInfo.secret };
+    isPost && dispatch(setPostWritingInfo(newPostElem));
+    !isPost && dispatch(setComentWritingInfo(newComentElem));
+    console.log(postWritingInfo);
   };
 
   return (

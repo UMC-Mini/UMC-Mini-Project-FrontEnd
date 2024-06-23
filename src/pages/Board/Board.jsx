@@ -12,13 +12,15 @@ import {
   setCurrentPage,
   setTotalPage,
 } from "../../state/post/postSlice";
+import PasswordModal from "../Post/components/PasswordModal";
 
-// 남은거 = 검색 구현 (0) , 페이지이동 구현 (0), 글작성 구현(x), 포스트 상세 페이지 통신데이터로 구현 (0), 댓글쓰기 구현, 비밀글/댓글 체크 추적해서 post
+// 남은거 = 글작성 구현, 대댓글쓰기 구현
 
 export default function Board() {
   const recentPosts = useSelector((state) => state.post.posts);
   const currentPage = useSelector((state) => state.post.currentPage);
   const totalPage = useSelector((state) => state.post.totalPage);
+  const pwModalOpen = useSelector((state) => state.post.pwModalOpen);
   const dispatch = useDispatch();
 
   const HeaderUser = {
@@ -30,10 +32,6 @@ export default function Board() {
     dispatch(setPosts(data.result.list));
     dispatch(setTotalPage(data.result.totalPage));
   };
-
-  // const getSearchKeywordPosts = async () => {
-  //   const { data } = await defaultInstance.get("/posts");
-  // };
 
   const getSearchKeywordPosts = async (e) => {
     e.preventDefault();
@@ -72,6 +70,7 @@ export default function Board() {
     <S.Container>
       <Navbar></Navbar>
       <S.BoardBox>
+        {/* {pwModalOpen && <PasswordModal></PasswordModal>} */}
         <S.BoardBoxHeader>문의 게시판</S.BoardBoxHeader>
         <S.BoardBoxPostContainer>
           <BoardPost
@@ -83,9 +82,9 @@ export default function Board() {
             isTop="true"
           ></BoardPost>
           {recentPosts &&
-            recentPosts.map((item) => {
-              console.log(item);
-              return <BoardPost key={item.id} {...item} />; // 같은 이름의 props로 자동 전달
+            recentPosts.map((item, index) => {
+              index += 1;
+              return <BoardPost key={item.id} index={index} {...item} />; // 같은 이름의 props로 자동 전달
             })}
         </S.BoardBoxPostContainer>
       </S.BoardBox>
