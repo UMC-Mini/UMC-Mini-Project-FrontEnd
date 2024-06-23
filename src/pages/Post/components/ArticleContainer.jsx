@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as S from "./ArticleContainer.style";
 import { defaultInstance } from "../../../api/axiosInstance";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   // setPosts,
@@ -13,6 +13,7 @@ import {
 function ArticleContainer(props) {
   const { isWriting } = props;
   const { postID } = useParams();
+  const navigate = useNavigate();
   // console.log(postID);
 
   const dispatch = useDispatch();
@@ -48,6 +49,20 @@ function ArticleContainer(props) {
     console.log(newElem);
   };
 
+  // 게시글 삭제
+  const deletePostClickHandler = async (e) => {
+    e.stopPropagation();
+    if (confirm("삭제하시겠습니까?") == true) {
+      await defaultInstance.delete("/posts/" + postID);
+      alert("포스트 삭제 성공! 게시판 페이지로 이동합니다");
+      navigate("/board");
+    } else {
+      alert("포스트 삭제를 취소합니다");
+    }
+    // data.isSuccess === true
+    //   : alert("포스트 삭제에 실패했습니다.");
+  };
+
   return (
     <S.BoardBox>
       {isWriting ? (
@@ -65,21 +80,17 @@ function ArticleContainer(props) {
         <>
           <S.HeaderBox>
             <div>{currentPost.title}</div>
-            <S.HeaderUserBox>{`작성자:${currentPost.author} 작성날짜:${
+            <S.HeaderUserBox>{`작성자:${currentPost.author.nickname} 작성날짜:${
               currentPostWriteTime.getFullYear().toString() +
               "-" +
               (currentPostWriteTime.getMonth() + 1).toString() +
               "-" +
               currentPostWriteTime.getDate().toString()
-              // " " +
-              // currentPostWriteTime.getHours().toString() +
-              // ":" +
-              // currentPostWriteTime.getMinutes().toString()
             } 조회수:${currentPost.views}`}</S.HeaderUserBox>
           </S.HeaderBox>
           <S.manageBox>
             <button>수정</button>
-            <button>삭제</button>
+            <button onClick={(e) => deletePostClickHandler(e)}>삭제</button>
           </S.manageBox>
           <S.ContentBox>{currentPost.content}</S.ContentBox>
         </>

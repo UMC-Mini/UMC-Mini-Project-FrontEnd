@@ -76,6 +76,7 @@ const initialState = {
   }, // content, secret, postID, parentID
   totalPage: 1,
   pwModalOpen: false,
+  isReplyWriting: false,
 };
 
 // 로직 : action -> dispatch(useDispatch)로 실행
@@ -128,6 +129,10 @@ const postSlice = createSlice({
     setPwModalOpen: (state, action) => {
       state.pwModalOpen = action.payload;
     },
+
+    setIsReplyWriting: (state, action) => {
+      state.isReplyWriting = action.payload;
+    },
   },
 });
 
@@ -143,5 +148,6 @@ export const {
   setPostWritingInfo,
   setComentWritingInfo,
   setPwModalOpen,
+  setIsReplyWriting,
 } = postSlice.actions;
 export default postSlice.reducer; // 리듀서를 통째로 반환해야 emutable한 기능 사용가능

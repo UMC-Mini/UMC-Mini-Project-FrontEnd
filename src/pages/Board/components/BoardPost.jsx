@@ -11,6 +11,7 @@ import {
   setPwModalOpen,
 } from "../../../state/post/postSlice";
 import PasswordModal from "../../Post/components/PasswordModal";
+import { defaultInstance } from "../../../api/axiosInstance";
 
 function BoardPost(props) {
   // const { id, title, writer, writeTime, views, isHeader, isHighlight } = props;

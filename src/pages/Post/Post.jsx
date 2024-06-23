@@ -29,6 +29,8 @@ export default function Post() {
     return state.post.comentWritingInfo;
   });
   const pwModalOpen = useSelector((state) => state.post.pwModalOpen);
+  const isReplyWriting = useSelector((state) => state.post.isReplyWriting);
+  const currentComentId = useSelector((state) => state.post.currentComentId);
 
   // 현재 포스트의 모든 댓글 불러오는 함수
   const getPostAllComents = async (postID) => {
@@ -75,41 +77,40 @@ export default function Post() {
 
   return (
     <>
+      <Navbar></Navbar>
       {pwModalOpen && <PasswordModal></PasswordModal>}
       {!pwModalOpen && (
-        <>
-          <Navbar></Navbar>
-          <S.PostBox>
-            {/* navbar 10% */}
-            {/* article container 60% -> 50%로 props 전달하기 */}
-            <ArticleContainer isWriting={false}></ArticleContainer>
-            {/* comentbox 30% */}
-            <S.ComentTopBox></S.ComentTopBox>
-            <S.ComentTopBox>
-              <div>댓글 작성</div>
-              <SecretBoxTextContainer isPost={false}></SecretBoxTextContainer>
-            </S.ComentTopBox>
-            <S.ComentWriteBox
-              onSubmit={(e) =>
-                postComentSubmitHandler(
-                  e,
-                  e.target[0].value,
-                  comentWritingInfo.secret,
-                  postID
-                )
-              }
-            >
-              <S.ComentWriteBoxInput
-                type="text"
-                placeholder="댓글을 입력하세요"
-              />
-              <S.ComentWriteBoxButton>등록</S.ComentWriteBoxButton>
-            </S.ComentWriteBox>
-            <S.ComentListBox>
-              {/* {console.log(currentPostComents[2])} */}
-              {currentPostComents &&
-                currentPostComents.map((item) => {
-                  return (
+        <S.PostBox>
+          {/* navbar 10% */}
+          {/* article container 60% -> 50%로 props 전달하기 */}
+          <ArticleContainer isWriting={false}></ArticleContainer>
+          {/* comentbox 30% */}
+          <S.ComentTopBox></S.ComentTopBox>
+          <S.ComentTopBox>
+            <div>댓글 작성</div>
+            <SecretBoxTextContainer isPost={false}></SecretBoxTextContainer>
+          </S.ComentTopBox>
+          <S.ComentWriteBox
+            onSubmit={(e) =>
+              postComentSubmitHandler(
+                e,
+                e.target[0].value,
+                comentWritingInfo.secret,
+                postID
+              )
+            }
+          >
+            <S.ComentWriteBoxInput
+              type="text"
+              placeholder="댓글을 입력하세요"
+            />
+            <S.ComentWriteBoxButton>등록</S.ComentWriteBoxButton>
+          </S.ComentWriteBox>
+          <S.ComentListBox>
+            {currentPostComents &&
+              currentPostComents.map((item) => {
+                return (
+                  <>
                     <PostComent
                       key={item.id}
                       author={item.author}
@@ -118,16 +119,51 @@ export default function Post() {
                       comentId={item.id}
                       reply={item.reply}
                       secret={item.secret}
+                      postId={postID}
                     ></PostComent>
-                  );
-                })}
-              {/* <PostComent reply={false}></PostComent>
+                    {item.children &&
+                      item.children.map((child) => {
+                        return (
+                          <PostComent
+                            key={child.id}
+                            author={child.author}
+                            createdAt={child.createdAt}
+                            content={child.content}
+                            comentId={child.id}
+                            reply={true}
+                            secret={child.secret}
+                          ></PostComent>
+                        );
+                      })}
+                    <S.ReplyContainer hidden={!isReplyWriting}>
+                      <S.ReplyTopBox>
+                        <div>대댓글 작성</div>
+                        <SecretBoxTextContainer></SecretBoxTextContainer>
+                      </S.ReplyTopBox>
+                      <S.ReplyWriteBox
+                        onSubmit={(e) =>
+                          postComentSubmitHandler(
+                            e,
+                            e.target[0].value,
+                            comentWritingInfo.secret,
+                            postID,
+                            currentComentId
+                          )
+                        }
+                      >
+                        <input type="text" placeholder="대댓글을 입력하세요" />
+                        <button>등록</button>
+                      </S.ReplyWriteBox>
+                    </S.ReplyContainer>
+                  </>
+                );
+              })}
+            {/* <PostComent reply={false}></PostComent>
           <PostComent reply={true}></PostComent>
           <PostComent reply={true}></PostComent> */}
-              {/* 마지막에 댓글 추가 요소 만들기 포스트 코멘트 props 조정해서  */}
-            </S.ComentListBox>
-          </S.PostBox>
-        </>
+            {/* 마지막에 댓글 추가 요소 만들기 포스트 코멘트 props 조정해서  */}
+          </S.ComentListBox>
+        </S.PostBox>
       )}
     </>
   );

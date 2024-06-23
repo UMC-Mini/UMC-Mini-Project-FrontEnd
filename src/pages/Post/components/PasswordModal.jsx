@@ -42,6 +42,7 @@ function PasswordModal() {
   return (
     pwModalOpen && (
       <S.Container onSubmit={(e) => pwSubmitHandler(e)}>
+        <div>비밀번호를 입력하세요</div>
         <S.InputBox
           type="text"
           onChange={(e) => {

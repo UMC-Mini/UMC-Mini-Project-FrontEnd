@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   position: relative;
   width: ${(props) => (props.reply ? "93.5%" : "100%")};
-  left: ${(props) => (props.reply ? "5vw" : "0")};
+  /* left: ${(props) => (props.reply ? "5vw" : "0")}; */
   background-color: ${(props) => (props.reply ? "#F8F8F8" : "white")};
   height: 20vh;
   display: flex;
@@ -36,13 +36,30 @@ const HeaderBoxLeft = styled.div`
   display: flex;
 `;
 
+const HeaderBoxRight = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    color: #999999;
+    border: none;
+    text-decoration: underline;
+    background-color: white;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
 const ContentBox = styled.div`
   width: 100%;
   height: 50%;
   display: flex;
 `;
 
-const FooterBox = styled.form`
+const FooterBox = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
@@ -73,6 +90,7 @@ export {
   ReplyIcon,
   HeaderBox,
   HeaderBoxLeft,
+  HeaderBoxRight,
   ContentBox,
   FooterBox,
   FooterBoxLeft,

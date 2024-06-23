@@ -59,18 +59,18 @@ const HeaderUserBox = styled.div`
 
 const manageBox = styled.div`
   position: relative;
-  top: 5vh;
-  left: 30vw;
+  top: 4vh;
+  left: 34vw;
   button {
     color: #999999;
     border: none;
     text-decoration: underline;
     background-color: white;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
-`
+`;
 
 const ContentBox = styled.div`
   width: 80%;
