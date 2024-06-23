@@ -57,10 +57,12 @@ const initialState = {
   posts: [],
   currentPage: 1,
   currentPost: {},
+  currentComent: {},
   currentPassword: "", // 포스트 하나 가져올 떄
   currentPostId: null,
   currentPostComents: [],
   currentComentId: null,
+  currentComentParentId: null,
   postWritingInfo: {
     title: "",
     content: "",
@@ -76,7 +78,13 @@ const initialState = {
   }, // content, secret, postID, parentID
   totalPage: 1,
   pwModalOpen: false,
-  isReplyWriting: false,
+  isReplyWriting: {
+    id: "",
+    selected: false,
+  },
+  isSelected: {
+    selected: null,
+  },
 };
 
 // 로직 : action -> dispatch(useDispatch)로 실행
@@ -101,6 +109,10 @@ const postSlice = createSlice({
       state.currentPost = action.payload;
     },
 
+    setCurrentComent: (state, action) => {
+      state.currentComent = action.payload;
+    },
+
     setCurrentPassword: (state, action) => {
       state.currentPassword = action.payload;
     },
@@ -118,6 +130,10 @@ const postSlice = createSlice({
       state.currentComentId = action.payload;
     },
 
+    setCurrentComentParentId: (state, action) => {
+      state.currentComentParentId = action.payload;
+    },
+
     setPostWritingInfo: (state, action) => {
       state.postWritingInfo = action.payload;
     },
@@ -133,6 +149,10 @@ const postSlice = createSlice({
     setIsReplyWriting: (state, action) => {
       state.isReplyWriting = action.payload;
     },
+
+    setIsSelected: (state, action) => {
+      state.isSelected = action.payload;
+    },
   },
 });
 
@@ -141,13 +161,16 @@ export const {
   setCurrentPage,
   setTotalPage,
   setCurrentPost,
+  setCurrentComent,
   setCurrentPassword,
   setCurrentPostId,
   setCurrentPostComents,
   setCurrentComentId,
+  setCurrentComentParentId,
   setPostWritingInfo,
   setComentWritingInfo,
   setPwModalOpen,
   setIsReplyWriting,
+  setIsSelected,
 } = postSlice.actions;
 export default postSlice.reducer; // 리듀서를 통째로 반환해야 emutable한 기능 사용가능

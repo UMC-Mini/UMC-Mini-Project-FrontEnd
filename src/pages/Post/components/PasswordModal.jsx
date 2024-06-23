@@ -16,21 +16,25 @@ function PasswordModal() {
   const currentPostId = useSelector((state) => state.currentPostId);
   const pwModalOpen = useSelector((state) => state.post.pwModalOpen);
   const currentPassword = useSelector((state) => state.post.currentPassword);
+  const currentPost = useSelector((state) => state.post.currentPost);
   const navigate = useNavigate();
 
   const pwInputChangeHandler = (e) => {
-    // console.log(e.target.value);
     dispatch(setCurrentPassword(e.target.value));
   };
 
   const useGetSelectedPostContent = async (password) => {
-    console.log(currentPostId, password);
-    const { data } = await defaultInstance.post("/posts/get", {
-      postId: postID,
-      password: password,
-    });
-    console.log(data);
-    dispatch(setCurrentPost(data.result));
+    try {
+      const { data } = await defaultInstance.post("/posts/get", {
+        postId: postID,
+        password: password,
+      });
+      // console.log(data);
+      dispatch(setCurrentPost(data.result));
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   };
 
   const pwSubmitHandler = (e) => {

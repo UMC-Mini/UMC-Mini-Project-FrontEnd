@@ -4,38 +4,46 @@ import { defaultInstance } from "../../../api/axiosInstance";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setCurrentPassword,
   // setPosts,
   // setCurrentPage,
   setCurrentPost,
   setPostWritingInfo,
+  setPwModalOpen,
 } from "../../../state/post/postSlice";
 
 function ArticleContainer(props) {
   const { isWriting } = props;
   const { postID } = useParams();
+  console.log(postID);
   const navigate = useNavigate();
   // console.log(postID);
 
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.post.currentPost);
   const currentPostWriteTime = new Date(currentPost.createdAt);
+  const currentPassword = useSelector((state) => state.post.currentPassword);
   const postWritingInfo = useSelector((state) => state.post.postWritingInfo);
 
   // 훅을 쓸 수 없어서 따로 만듦
   const getPostContent = async (postID, password) => {
-    const { data } = await defaultInstance.post("/posts/get", {
-      postId: postID,
-      password: password ? password : null,
-    });
-    console.log(data);
-    dispatch(setCurrentPost(data.result));
+    try {
+      const { data } = await defaultInstance.post("/posts/get", {
+        postId: postID,
+        password: password ? password : null,
+      });
+      dispatch(setCurrentPost(data.result));
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   };
 
   useEffect(() => {
     if (!isWriting) {
-      getPostContent(postID);
+      getPostContent(postID, currentPassword);
     }
-  }, [dispatch]);
+  }, [, dispatch]);
 
   const headerBoxInputHandler = (e) => {
     const newElem = { ...postWritingInfo, title: e.target.value };
@@ -53,14 +61,38 @@ function ArticleContainer(props) {
   const deletePostClickHandler = async (e) => {
     e.stopPropagation();
     if (confirm("삭제하시겠습니까?") == true) {
-      await defaultInstance.delete("/posts/" + postID);
-      alert("포스트 삭제 성공! 게시판 페이지로 이동합니다");
-      navigate("/board");
+      try {
+        const { data } = await defaultInstance.delete(`/posts/${postID}`);
+        alert("포스트 삭제 성공! 게시판 페이지로 이동합니다");
+      } catch (error) {
+        alert("댓글이 있는 포스트는 삭제할 수 없습니다.");
+        navigate("/board");
+      }
     } else {
       alert("포스트 삭제를 취소합니다");
     }
-    // data.isSuccess === true
-    //   : alert("포스트 삭제에 실패했습니다.");
+  };
+
+  // 게시글 수정
+  const updatePostClickHandler = async (e) => {
+    e.stopPropagation();
+    const patchPostTitle = prompt("수정할 제목을 입력하세요");
+    const patchPostContent = prompt("수정할 본문 내용을 입력하세요");
+
+    const requestData = {
+      title: patchPostTitle,
+      content: patchPostContent,
+      secret: currentPost.secret,
+    };
+    await defaultInstance.patch("/posts/" + postID, requestData);
+    alert("포스트 수정 성공! ");
+    dispatch(
+      setCurrentPost({
+        ...currentPost,
+        title: patchPostTitle,
+        content: patchPostContent,
+      })
+    );
   };
 
   return (
@@ -80,7 +112,7 @@ function ArticleContainer(props) {
         <>
           <S.HeaderBox>
             <div>{currentPost.title}</div>
-            <S.HeaderUserBox>{`작성자:${currentPost.author.nickname} 작성날짜:${
+            <S.HeaderUserBox>{`작성자:${currentPost.author} 작성날짜:${
               currentPostWriteTime.getFullYear().toString() +
               "-" +
               (currentPostWriteTime.getMonth() + 1).toString() +
@@ -89,7 +121,7 @@ function ArticleContainer(props) {
             } 조회수:${currentPost.views}`}</S.HeaderUserBox>
           </S.HeaderBox>
           <S.manageBox>
-            <button>수정</button>
+            <button onClick={(e) => updatePostClickHandler(e)}>수정</button>
             <button onClick={(e) => deletePostClickHandler(e)}>삭제</button>
           </S.manageBox>
           <S.ContentBox>{currentPost.content}</S.ContentBox>

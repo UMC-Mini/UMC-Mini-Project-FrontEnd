@@ -46,7 +46,6 @@ function PostWrite() {
               multiple="true" // multiple 로 써도 됨
               // hidden
             ></S.AttachmentBoxInput>
-            {/* <S.AttachmentBoxText>파일 미첨부</S.AttachmentBoxText> */}
           </S.AttachmentBox>
           <S.SubmitBox
             onSubmit={(e) => {

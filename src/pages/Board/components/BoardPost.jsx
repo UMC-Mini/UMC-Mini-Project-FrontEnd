@@ -34,6 +34,7 @@ function BoardPost(props) {
   const dispatch = useDispatch();
   const pwModalOpen = useSelector((state) => state.post.pwModalOpen);
   const currentPostId = useSelector((state) => state.post.currentPostId);
+  const currentPassword = useSelector((state) => state.post.currentPassword);
 
   const [width, setWidth] = useState(["10%", "10%", "10%", "15%", "10%"]);
   const [marginRight, setMarginRight] = useState([
@@ -93,7 +94,7 @@ function BoardPost(props) {
     <S.BoardBoxPost
       // key={id}
       borderPx={borderPx}
-      onClick={(e) => postItemClickHandler(e)}
+      onClick={(e) => postItemClickHandler(e, currentPassword)}
       isTop={isTop}
     >
       {/* {secret ? <PasswordModal></PasswordModal> : null} */}

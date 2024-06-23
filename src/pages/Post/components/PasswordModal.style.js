@@ -10,9 +10,9 @@ const Container = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid #999999;
+  border: 1px solid #cde7ff;
   border-radius: 10px;
-  background-color: #999999;
+  background-color: #cde7ff;
   z-index: 10;
   gap: 10px;
 `;
@@ -28,7 +28,12 @@ const InputButton = styled.button`
   width: 20%;
   height: 20px;
   border-radius: 10px;
-  background-color: #c9c9c9;
+  background-color: #d9d9d9;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #c9c9c9;
+  }
 `;
 
 export { Container, InputBox, InputButton };

@@ -5,7 +5,7 @@ const Container = styled.div`
   width: ${(props) => (props.reply ? "93.5%" : "100%")};
   /* left: ${(props) => (props.reply ? "5vw" : "0")}; */
   background-color: ${(props) => (props.reply ? "#F8F8F8" : "white")};
-  height: 20vh;
+  height: 150px;
   display: flex;
   flex-direction: column;
   border-top: ${(props) => (props.reply ? "" : "1px solid #999999")};
@@ -46,7 +46,7 @@ const HeaderBoxRight = styled.div`
     color: #999999;
     border: none;
     text-decoration: underline;
-    background-color: white;
+    background-color: ${(props) => (!props.reply ? "white" : "#f8f8f8")};
     &:hover {
       cursor: pointer;
     }
