@@ -11,7 +11,7 @@ import {
   setIsReplyWriting,
   setIsSelected,
   setPwModalOpen,
-} from "../../../state/post/postSlice";
+} from "../../../redux/postSlice";
 
 function PostComent(props) {
   // coment = 댓글, reply = 대댓글

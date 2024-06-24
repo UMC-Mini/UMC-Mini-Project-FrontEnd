@@ -1,7 +1,7 @@
 import React from "react";
 import { defaultInstance } from "../api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPost } from "../state/post/postSlice";
+import { setCurrentPost } from "../redux/postSlice";
 
 // 일반글은 password에 null 전달
 async function usePostContent(postID, password) {

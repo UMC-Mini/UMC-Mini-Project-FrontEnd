@@ -3,7 +3,7 @@ import * as S from "./SecretBoxTextContainer.style";
 import {
   setComentWritingInfo,
   setPostWritingInfo,
-} from "../../../state/post/postSlice";
+} from "../../../redux/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function SecretBoxTextContainer(props) {

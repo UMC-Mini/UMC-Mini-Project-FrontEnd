@@ -6,7 +6,7 @@ import SecretBoxTextContainer from "./components/SecretBoxTextContainer";
 import ArticleContainer from "./components/ArticleContainer";
 import { defaultInstance } from "../../api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { setPostWritingInfo } from "../../state/post/postSlice";
+import { setPostWritingInfo } from "../../redux/postSlice";
 
 function PostWrite() {
   const navigate = useNavigate();

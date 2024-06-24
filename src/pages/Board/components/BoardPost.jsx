@@ -9,7 +9,7 @@ import {
   setCurrentPostId,
   setCurrentPost,
   setPwModalOpen,
-} from "../../../state/post/postSlice";
+} from "../../../redux/postSlice";
 import PasswordModal from "../../Post/components/PasswordModal";
 import { defaultInstance } from "../../../api/axiosInstance";
 

@@ -16,7 +16,8 @@ import {
   setComentWritingInfo,
   setIsReplyWriting,
   setPwModalOpen,
-} from "../../state/post/postSlice";
+  setCurrentComent,
+} from "../../redux/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import PasswordModal from "./components/PasswordModal";
 
@@ -73,6 +74,7 @@ export default function Post() {
       parentComentID ? requestDataReply : requestDataComent
     );
 
+    dispatch(setCurrentPostComents(currentPostComents.push(data.result)));
     location.reload();
   };
 
@@ -87,7 +89,6 @@ export default function Post() {
       {!pwModalOpen && (
         <S.PostBox>
           <ArticleContainer isWriting={false}></ArticleContainer>
-
           <S.ComentTopBox></S.ComentTopBox>
           <S.ComentTopBox>
             <div>댓글 작성</div>

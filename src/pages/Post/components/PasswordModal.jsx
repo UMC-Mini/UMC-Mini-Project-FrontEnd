@@ -5,7 +5,7 @@ import {
   setCurrentPassword,
   setCurrentPost,
   setPwModalOpen,
-} from "../../../state/post/postSlice";
+} from "../../../redux/postSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { defaultInstance } from "../../../api/axiosInstance";
 import usePostContent from "../../../Hooks/usePostContent";

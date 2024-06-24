@@ -10,32 +10,40 @@ import {
   setCurrentPost,
   setPostWritingInfo,
   setPwModalOpen,
-} from "../../../state/post/postSlice";
+} from "../../../redux/postSlice";
 
 function ArticleContainer(props) {
   const { isWriting } = props;
   const { postID } = useParams();
-  console.log(postID);
   const navigate = useNavigate();
-  // console.log(postID);
 
   const dispatch = useDispatch();
   const currentPost = useSelector((state) => state.post.currentPost);
   const currentPostWriteTime = new Date(currentPost.createdAt);
   const currentPassword = useSelector((state) => state.post.currentPassword);
   const postWritingInfo = useSelector((state) => state.post.postWritingInfo);
+  const pwModalOpen = useSelector((state) => state.post.pwModalOpen);
 
   // 훅을 쓸 수 없어서 따로 만듦
   const getPostContent = async (postID, password) => {
     try {
-      const { data } = await defaultInstance.post("/posts/get", {
+      const { data, isLoading } = await defaultInstance.post("/posts/get", {
         postId: postID,
         password: password ? password : null,
       });
-      dispatch(setCurrentPost(data.result));
+      console.log(data, isLoading);
+      // dispatch(setCurrentPost(data.result));
     } catch (error) {
       console.log(error);
+      if (currentPost.secret) {
+        dispatch(setPwModalOpen(true));
+        dispatch(setCurrentPassword(null));
+      }
       return;
+    }
+
+    if (pwModalOpen) {
+      confirm("비밀번호를 다시 입력하세요");
     }
   };
 
@@ -112,7 +120,9 @@ function ArticleContainer(props) {
         <>
           <S.HeaderBox>
             <div>{currentPost.title}</div>
-            <S.HeaderUserBox>{`작성자:${currentPost.author} 작성날짜:${
+            <S.HeaderUserBox>{`작성자:${
+              currentPost.author?.nickname
+            } 작성날짜:${
               currentPostWriteTime.getFullYear().toString() +
               "-" +
               (currentPostWriteTime.getMonth() + 1).toString() +

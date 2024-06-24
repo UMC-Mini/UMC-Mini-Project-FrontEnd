@@ -7,11 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { defaultInstance } from "../../api/axiosInstance";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setPosts,
-  setCurrentPage,
-  setTotalPage,
-} from "../../state/post/postSlice";
+import { setPosts, setCurrentPage, setTotalPage } from "../../redux/postSlice";
 import PasswordModal from "../Post/components/PasswordModal";
 
 // 남은거 = 글작성 구현, 대댓글쓰기 구현
