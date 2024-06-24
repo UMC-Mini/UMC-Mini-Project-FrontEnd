@@ -41,6 +41,7 @@ const Home = () => {
         </S.Welcome>
         <S.Title>상명대 카풀 매칭 서비스<br />스뮤풀 SMUPOOL</S.Title>
         <S.Button>
+          <button onClick={() => navigate("/Socket")}>실시간 채팅</button>
           <button onClick={() => navigate("/Board")}>문의사항</button>
           <button onClick={handleChatbotToggle}>실시간 상담</button>
         </S.Button>
