@@ -80,6 +80,7 @@ const Welcome = styled.div`
     background-color: #99BBEC;
     color: black;
     text-align: center;
+    cursor: pointer;
 
     width: 370px;
     border-radius: 40px;
