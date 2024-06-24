@@ -11,7 +11,6 @@ import PostWrite from "./pages/Post/PostWrite.jsx";
 import Socket from './pages/Socket/Socket.jsx';
 
 //라우팅 정리
-//도메인 별 작업
 const Layout = () => {
   return (
     <>
